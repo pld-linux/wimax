@@ -1,0 +1,26 @@
+diff -urN wimax-1.5.1/InfraStack/OSAgnostic/Product/Instrumantation/Makefile.am wimax-1.5.1.new//InfraStack/OSAgnostic/Product/Instrumantation/Makefile.am
+--- wimax-1.5.1/InfraStack/OSAgnostic/Product/Instrumantation/Makefile.am	2010-06-08 01:20:49.000000000 +0200
++++ wimax-1.5.1.new//InfraStack/OSAgnostic/Product/Instrumantation/Makefile.am	2011-03-11 17:25:17.767040001 +0100
+@@ -24,7 +24,10 @@
+ 
+ libWmxInstrument_la_LIBADD = DnDAgent/libDnDAgent.la \
+ 			MocMsgProxy/libMocMsgProxy.la \
+-			$(top_builddir)/InfraStack/OSDependent/Linux/InfraStackModules/IPCs/libSockets.la
++			$(top_builddir)/InfraStack/OSAgnostic/Product/PipeHandler/libPipeHandler.la \
++			$(top_builddir)/InfraStack/OSAgnostic/Common/CommonServices/libServices.la \
++			$(top_builddir)/InfraStack/OSAgnostic/Common/L4Common/libL4Common.la \
++			-lpthread
+ 
+ # FIXME: where do these header files really belong?
+ EXTRA_DIST = \
+diff -urN wimax-1.5.1/InfraStack/OSAgnostic/WiMax/Wrappers/iWmxSDK/Makefile.am wimax-1.5.1.new//InfraStack/OSAgnostic/WiMax/Wrappers/iWmxSDK/Makefile.am
+--- wimax-1.5.1/InfraStack/OSAgnostic/WiMax/Wrappers/iWmxSDK/Makefile.am	2010-06-08 01:20:49.000000000 +0200
++++ wimax-1.5.1.new//InfraStack/OSAgnostic/WiMax/Wrappers/iWmxSDK/Makefile.am	2011-03-11 16:42:03.192474334 +0100
+@@ -107,6 +107,7 @@
+ libiWmxSdk_la_LIBADD =  $(top_builddir)/InfraStack/OSAgnostic/Common/CommonServices/libServices.la \
+ 			$(top_builddir)/InfraStack/OSAgnostic/Product/PipeHandler/libPipeHandler.la \
+ 			$(top_builddir)/InfraStack/OSAgnostic/Common/L4Common/libL4Common.la \
++			-lpthread \
+ 			-lm
+ 
+ 
