@@ -9,14 +9,14 @@ Source0:	%{name}-%{version}.tar.gz
 # Source0-md5:	8d7fae21a62b5aeda3f730c484bdd5fb
 Patch0:		%{name}-link.patch
 URL:		http://www.linuxwimax.org/
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	libeap-devel >= 0.7.0
+BuildRequires:	libtool
 BuildRequires:	libwimaxll-devel
 BuildRequires:	linux-libc-headers
 BuildRequires:	pkgconfig
 BuildRequires:	zlib-devel
-BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	libtool
 Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
