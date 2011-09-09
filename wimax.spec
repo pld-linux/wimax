@@ -1,4 +1,5 @@
 Summary:	WiMAX Network Service for the Intel 2400m
+Summary(pl.UTF-8):	Usługi sieciowe WiMAX dla układów Intel 2400m
 Name:		wimax
 Version:	1.5.1
 Release:	1
@@ -9,12 +10,12 @@ Source0:	%{name}-%{version}.tar.gz
 # Source0-md5:	8d7fae21a62b5aeda3f730c484bdd5fb
 Patch0:		%{name}-link.patch
 URL:		http://www.linuxwimax.org/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	libeap-devel >= 0.7.0
 BuildRequires:	libtool
 BuildRequires:	libwimaxll-devel
-BuildRequires:	linux-libc-headers
+BuildRequires:	linux-libc-headers >= 7:2.6.29
 BuildRequires:	pkgconfig
 BuildRequires:	zlib-devel
 Requires:	%{name}-libs = %{version}-%{release}
@@ -24,20 +25,25 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 User space daemon for the Intel 2400m Wireless WiMAX Link. This daemon
 takes care of handling network scan, discovery and management.
 
+%description -l pl.UTF-8
+Demon przestrzeni użytkownika dla połączeń bezprzewodowych WiMAX przy
+użyciu układów Intel 2400m. Demon ten obsługuje skanowanie, wykrywanie
+i zarządzanie siecią.
+
 %package libs
 Summary:	WiMAX Network Service libraries
-Summary(pl.UTF-8):	Biblioteki WiMAX Network Service
+Summary(pl.UTF-8):	Biblioteki usług sieciowych WiMAX
 Group:		Libraries
 
 %description libs
 WiMAX Network Service libraries.
 
 %description libs -l pl.UTF-8
-Biblioteki WiMAX Network Service.
+Biblioteki usług sieciowych WiMAX.
 
 %package devel
 Summary:	Header files for WiMAX Network Service libraries
-Summary(pl.UTF-8):	Pliki nagłówkowe bibliotek WiMAX Network Service
+Summary(pl.UTF-8):	Pliki nagłówkowe bibliotek usług sieciowych WiMAX
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 
@@ -45,11 +51,11 @@ Requires:	%{name}-libs = %{version}-%{release}
 Header files for WiMAX Network Service libraries.
 
 %description devel -l pl.UTF-8
-Pliki nagłówkowe bibliotek WiMAX Network Service.
+Pliki nagłówkowe bibliotek usług sieciowych WiMAX.
 
 %package static
 Summary:	Static WiMAX Network Service libraries
-Summary(pl.UTF-8):	Statyczne biblioteki WiMAX Network Service
+Summary(pl.UTF-8):	Statyczne biblioteki usług sieciowych WiMAX
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -57,7 +63,7 @@ Requires:	%{name}-devel = %{version}-%{release}
 Static WiMAX Network Service libraries.
 
 %description static -l pl.UTF-8
-Statyczne biblioteki WiMAX Network Service.
+Statyczne biblioteki usług sieciowych WiMAX.
 
 %prep
 %setup -q
@@ -77,13 +83,14 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# obsoleted by pkg-config
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post libs	-p /sbin/ldconfig
-%postun libs	-p /sbin/ldconfig
+%post	libs -p /sbin/ldconfig
+%postun	libs -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
